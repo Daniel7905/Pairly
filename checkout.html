@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout – Pairly</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="cart.css">
+  <link rel="stylesheet" href="checkout.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <h1><a href="index.html">Pairly</a></h1>
+    <nav>
+      <a href="index.html#products">Products</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <a class="cart-link" href="cart.html" aria-label="Cart">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 016 0"/></svg>
+      Cart <span class="cart-count" id="cartCount">0</span>
+    </a>
+  </header>
+
+  <main class="checkout-page">
+    <h2 id="pageTitle">Checkout</h2>
+
+    <!-- Shown when there is nothing to buy -->
+    <div class="empty-cart" id="emptyState" hidden>
+      <div class="big">🛍️</div>
+      <h3>Nothing to check out</h3>
+      <p>Your cart is empty.</p>
+      <a class="button" href="index.html#products">Start shopping</a>
+    </div>
+
+    <!-- Shown after the order is placed -->
+    <section class="success" id="success" hidden></section>
+
+    <div class="checkout-layout" id="checkoutLayout">
+
+      <!-- ========== FORM ========== -->
+      <form id="orderForm">
+
+        <div class="box">
+          <h3><span class="step">1</span> Contact details</h3>
+          <div class="fields">
+            <div class="field full">
+              <label for="fullName">Full name</label>
+              <input id="fullName" name="fullName" type="text" autocomplete="name" required minlength="2">
+            </div>
+            <div class="field">
+              <label for="phone">Mobile number</label>
+              <input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national"
+                     pattern="[6-9][0-9]{9}" maxlength="10" placeholder="10-digit number"
+                     title="Enter a 10-digit mobile number" required>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3><span class="step">2</span> Shipping address</h3>
+          <div class="fields">
+            <div class="field full">
+              <label for="address1">Address</label>
+              <input id="address1" name="address1" type="text" autocomplete="address-line1"
+                     placeholder="House no., building, street" required>
+            </div>
+            <div class="field full">
+              <label for="address2">Area / landmark <span class="opt">(optional)</span></label>
+              <input id="address2" name="address2" type="text" autocomplete="address-line2">
+            </div>
+            <div class="field">
+              <label for="city">City</label>
+              <input id="city" name="city" type="text" autocomplete="address-level2" required>
+            </div>
+            <div class="field">
+              <label for="state">State</label>
+              <input id="state" name="state" type="text" autocomplete="address-level1" required>
+            </div>
+            <div class="field">
+              <label for="pin">PIN code</label>
+              <input id="pin" name="pin" type="text" inputmode="numeric" autocomplete="postal-code"
+                     pattern="[1-9][0-9]{5}" maxlength="6" placeholder="6 digits"
+                     title="Enter a 6-digit PIN code" required>
+            </div>
+            <div class="field">
+              <label for="country">Country</label>
+              <input id="country" type="text" value="India" disabled>
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3><span class="step">3</span> Payment method</h3>
+
+          <div class="pay-options" id="payOptions">
+            <label class="pay-option selected">
+              <input type="radio" name="pay" value="upi" checked>
+              <span class="pay-title">UPI</span><span class="pay-sub">GPay, PhonePe, Paytm</span>
+            </label>
+            <label class="pay-option">
+              <input type="radio" name="pay" value="card">
+              <span class="pay-title">Card</span><span class="pay-sub">Credit or debit</span>
+            </label>
+            <label class="pay-option">
+              <input type="radio" name="pay" value="cod">
+              <span class="pay-title">Cash on delivery</span><span class="pay-sub">Pay when it arrives</span>
+            </label>
+          </div>
+
+          <div class="pay-panel" id="panel-upi">
+            <div class="field">
+              <label for="upiId">UPI ID</label>
+              <input id="upiId" name="upiId" type="text" placeholder="name@bank"
+                     pattern="[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}" title="Example: name@okaxis" required>
+            </div>
+          </div>
+
+          <div class="pay-panel" id="panel-card" hidden>
+            <div class="fields">
+              <div class="field full">
+                <label for="cardNumber">Card number</label>
+                <input id="cardNumber" type="text" inputmode="numeric" autocomplete="cc-number"
+                       placeholder="1234 5678 9012 3456" maxlength="23" pattern="[0-9 ]{13,23}"
+                       title="Enter your card number" required disabled>
+              </div>
+              <div class="field full">
+                <label for="cardName">Name on card</label>
+                <input id="cardName" type="text" autocomplete="cc-name" required disabled>
+              </div>
+              <div class="field">
+                <label for="cardExpiry">Expiry (MM/YY)</label>
+                <input id="cardExpiry" type="text" inputmode="numeric" autocomplete="cc-exp"
+                       placeholder="MM/YY" maxlength="5" pattern="(0[1-9]|1[0-2])\/[0-9]{2}"
+                       title="Use the format MM/YY" required disabled>
+              </div>
+              <div class="field">
+                <label for="cardCvv">CVV</label>
+                <input id="cardCvv" type="password" inputmode="numeric" autocomplete="cc-csc"
+                       maxlength="4" pattern="[0-9]{3,4}" title="3 or 4 digits" required disabled>
+              </div>
+            </div>
+          </div>
+
+          <div class="pay-panel" id="panel-cod" hidden>
+            <p class="note">Pay in cash (or UPI) to the delivery person when your order arrives.</p>
+          </div>
+
+          <p class="demo-note">
+            🔒 <strong>Demo checkout.</strong> No payment is taken and card details are never saved or sent anywhere.
+            To accept real payments, connect a gateway such as Razorpay (see the comment in this file's script).
+          </p>
+        </div>
+
+      </form>
+
+      <!-- ========== ORDER SUMMARY ========== -->
+      <aside class="order-summary">
+        <h3>Order summary</h3>
+        <div id="summaryItems"></div>
+        <div class="row"><span>Subtotal</span><span id="sSubtotal"></span></div>
+        <div class="row"><span>Shipping</span><span id="sShipping"></span></div>
+        <div class="row total"><span>Total</span><span id="sTotal"></span></div>
+        <button type="submit" form="orderForm" class="button place-order" id="placeBtn">Place order</button>
+        <a class="back-link" href="cart.html">← Back to cart</a>
+      </aside>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Pairly. All rights reserved.</p>
+  </footer>
+
+  <script src="products.js"></script>
+  <script src="cart.js"></script>
+  <script src="auth.js"></script>
+  <script>
+    const FREE_SHIPPING_FROM = 999;   // keep these the same as in cart.html
+    const SHIPPING_FEE = 99;
+
+    const $ = id => document.getElementById(id);
+    const money = n => "₹" + n.toLocaleString("en-IN");
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+    // ---------- 1. What is being bought? ----------
+    // product.html "Buy now" sends ?buy=...&size=...&qty=...  (only that item)
+    // cart.html "Checkout" sends no parameters (everything in the cart)
+    const params = new URLSearchParams(location.search);
+    let items, fromCart = false;
+
+    if (params.get("buy") && PRODUCTS[params.get("buy")]) {
+      const qty = Math.min(Math.max(parseInt(params.get("qty"), 10) || 1, 1), 10);
+      items = [{ id: params.get("buy"), size: params.get("size") || "", qty: qty }];
+    } else {
+      fromCart = true;
+      items = getCart().filter(i => PRODUCTS[i.id]);
+    }
+
+    const subtotal = items.reduce((sum, i) => sum + PRODUCTS[i.id].price * i.qty, 0);
+    const shipping = subtotal >= FREE_SHIPPING_FROM ? 0 : SHIPPING_FEE;
+    const total = subtotal + shipping;
+
+    // ---------- 2. Summary ----------
+    if (!items.length) {
+      $("checkoutLayout").hidden = true;
+      $("emptyState").hidden = false;
+    } else {
+      $("summaryItems").innerHTML = items.map(i => {
+        const p = PRODUCTS[i.id];
+        return `<div class="sum-item">
+          <div class="thumb"><img src="${p.image}" alt=""><span class="qty-badge">${i.qty}</span></div>
+          <div><strong>${esc(p.name)}</strong><p class="meta">${p.category}${i.size ? " · Size " + esc(i.size) : ""}</p></div>
+          <span>${money(p.price * i.qty)}</span>
+        </div>`;
+      }).join("");
+      $("sSubtotal").textContent = money(subtotal);
+      $("sShipping").innerHTML = shipping ? money(shipping) : '<span class="free">Free</span>';
+      $("sTotal").textContent = money(total);
+    }
+
+    // ---------- 3. Payment method switching ----------
+    const form = $("orderForm");
+
+    function setPay(method) {
+      document.querySelectorAll(".pay-option").forEach(o =>
+        o.classList.toggle("selected", o.querySelector("input").value === method));
+      ["upi", "card", "cod"].forEach(m => {
+        const panel = $("panel-" + m);
+        panel.hidden = m !== method;
+        // hidden fields are disabled so they never block the form from submitting
+        panel.querySelectorAll("input").forEach(inp => inp.disabled = m !== method);
+      });
+      $("placeBtn").textContent = method === "cod" ? "Place order · " + money(total) : "Pay " + money(total);
+    }
+    form.querySelectorAll('input[name="pay"]').forEach(r => r.addEventListener("change", () => setPay(r.value)));
+    setPay("upi");
+
+    // Logged in? Fill in what we already know.
+    const me = Auth.currentUser();
+    if (me) {
+      $("fullName").value = me.name;
+      $("email").value = me.email;
+      if (me.phone) $("phone").value = me.phone;
+    }
+
+    // Card field helpers
+    $("cardNumber").addEventListener("input", e => {
+      e.target.value = e.target.value.replace(/\D/g, "").slice(0, 19).replace(/(.{4})/g, "$1 ").trim();
+    });
+    $("cardExpiry").addEventListener("input", e => {
+      let v = e.target.value.replace(/\D/g, "").slice(0, 4);
+      if (v.length > 2) v = v.slice(0, 2) + "/" + v.slice(2);
+      e.target.value = v;
+      e.target.setCustomValidity("");
+    });
+    $("cardCvv").addEventListener("input", e => { e.target.value = e.target.value.replace(/\D/g, ""); });
+    ["phone", "pin"].forEach(id =>
+      $(id).addEventListener("input", e => { e.target.value = e.target.value.replace(/\D/g, ""); }));
+
+    // ---------- 4. Place the order ----------
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();                       // runs only when every visible field is valid
+      const method = form.pay.value;
+
+      if (method === "card") {
+        const [mm, yy] = $("cardExpiry").value.split("/").map(Number);
+        const expiresAt = new Date(2000 + yy, mm, 1);          // first day of the month after expiry
+        if (expiresAt <= new Date()) {
+          $("cardExpiry").setCustomValidity("This card has expired");
+          $("cardExpiry").reportValidity();
+          return;
+        }
+      }
+
+      /* ---- REAL PAYMENTS (Razorpay example) ----
+         1. Your server creates a Razorpay order and returns its order_id.
+         2. Open Razorpay Checkout here:
+              new Razorpay({ key: "YOUR_KEY_ID", amount: total * 100, currency: "INR",
+                             order_id: serverOrderId, handler: function (res) { completeOrder(...); } }).open();
+         3. Your server verifies the payment signature before you mark the order as paid.
+         Never build your own card form for live payments. Use the gateway's hosted checkout. */
+
+      const btn = $("placeBtn");
+      btn.disabled = true;
+      btn.textContent = method === "cod" ? "Placing order…" : "Processing payment…";
+      setTimeout(() => completeOrder(method), 1400);   // pretend to talk to a payment server
+    });
+
+    function completeOrder(method) {
+      const data = new FormData(form);
+      const payLabel = { upi: "UPI", card: "Card", cod: "Cash on delivery" }[method];
+
+      const order = {
+        id: "MS" + Date.now().toString().slice(-8),
+        date: new Date().toISOString(),
+        items: items.map(i => ({ id: i.id, name: PRODUCTS[i.id].name, size: i.size, qty: i.qty, price: PRODUCTS[i.id].price })),
+        subtotal, shipping, total,
+        customer: {
+          name: data.get("fullName"), phone: data.get("phone"), email: data.get("email"),
+          address: [data.get("address1"), data.get("address2"), data.get("city"), data.get("state"), data.get("pin")]
+                     .filter(Boolean).join(", ")
+        },
+        payment: payLabel,               // only the method is saved, never card details
+        status: "Placed",
+        userEmail: Auth.currentUser() ? Auth.currentUser().email : null   // links the order to the account
+      };
+
+      try {
+        const orders = JSON.parse(localStorage.getItem("myshop-orders")) || [];
+        orders.push(order);
+        localStorage.setItem("myshop-orders", JSON.stringify(orders));
+      } catch (err) {}
+
+      if (fromCart) saveCart([]);        // empty the cart after a cart checkout
+      showSuccess(order, method);
+    }
+
+    // ---------- 5. Confirmation ----------
+    function showSuccess(order, method) {
+      const delivery = new Date(Date.now() + 5 * 864e5)
+        .toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long" });
+
+      $("checkoutLayout").hidden = true;
+      $("pageTitle").hidden = true;
+      $("success").hidden = false;
+      $("success").innerHTML = `
+        <div class="tick">✓</div>
+        <h2>Thank you, ${esc(order.customer.name.split(" ")[0])}!</h2>
+        <p class="lead">Your order <strong>#${order.id}</strong> has been placed.</p>
+        <div class="box receipt">
+          <div class="row"><span>Estimated delivery</span><strong>${delivery}</strong></div>
+          <div class="row"><span>Payment</span><strong>${method === "cod" ? "Pay on delivery" : order.payment + " (demo, nothing charged)"}</strong></div>
+          <div class="row"><span>Ship to</span><strong class="addr">${esc(order.customer.name)}<br>${esc(order.customer.address)}</strong></div>
+          <hr>
+          ${order.items.map(i => `<div class="row"><span>${esc(i.name)}${i.size ? " (" + esc(i.size) + ")" : ""} × ${i.qty}</span><span>${money(i.price * i.qty)}</span></div>`).join("")}
+          <div class="row"><span>Shipping</span><span>${order.shipping ? money(order.shipping) : "Free"}</span></div>
+          <div class="row total"><span>Total</span><span>${money(order.total)}</span></div>
+        </div>
+        <a class="button" href="index.html#products">Continue shopping</a>`;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>

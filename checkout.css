@@ -1,0 +1,130 @@
+/* Checkout page (used with style.css and cart.css) */
+
+.checkout-page { max-width: 1100px; margin: 0 auto; padding: 2rem; min-height: 70vh; }
+.checkout-page > h2 { font-size: 2rem; margin-bottom: 1.5rem; }
+
+.checkout-layout {
+  display: grid; grid-template-columns: 1fr 380px;
+  gap: 2rem; align-items: start;
+}
+
+/* ---------- Form boxes ---------- */
+.box {
+  background: #fff; border: 1px solid #e3e6ea; border-radius: 16px;
+  padding: 1.5rem; margin-bottom: 1.25rem;
+}
+.box h3 { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.1rem; font-size: 1.1rem; }
+
+.step {
+  display: inline-grid; place-items: center;
+  width: 1.7rem; height: 1.7rem; border-radius: 50%;
+  background: #0066ff; color: #fff; font-size: 0.85rem;
+}
+
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.field.full { grid-column: 1 / -1; }
+
+.field label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.3rem; }
+.field .opt { color: #888; font-weight: 400; }
+
+.field input {
+  width: 100%; padding: 0.7rem 0.9rem; font-size: 1rem;
+  border: 1px solid #ccd2d8; border-radius: 10px; background: #fff; color: #222;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field input:focus { outline: none; border-color: #0066ff; box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.2); }
+.field input:user-invalid { border-color: #e5484d; }
+.field input:disabled { background: #f4f6f8; color: #888; }
+
+/* ---------- Payment options ---------- */
+.pay-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1.1rem; }
+
+.pay-option {
+  position: relative; display: block; cursor: pointer;
+  padding: 0.9rem 1rem 0.9rem 2.5rem;
+  border: 1px solid #ccd2d8; border-radius: 12px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.pay-option input { position: absolute; left: 0.9rem; top: 1.05rem; accent-color: #0066ff; }
+.pay-option:hover { border-color: #0066ff; }
+.pay-option.selected { border-color: #0066ff; background: #eef4ff; }
+.pay-title { display: block; font-weight: 600; }
+.pay-sub { display: block; font-size: 0.8rem; color: #666; }
+
+.pay-panel { margin-top: 0.5rem; }
+.note { color: #555; font-size: 0.95rem; }
+.demo-note {
+  margin-top: 1.25rem; padding: 0.8rem 1rem; font-size: 0.85rem; color: #5a4a00;
+  background: #fff8db; border: 1px solid #f0dc8a; border-radius: 10px;
+}
+
+/* ---------- Order summary ---------- */
+.order-summary {
+  background: #f4f6f8; border-radius: 16px; padding: 1.5rem;
+  position: sticky; top: 90px;
+}
+.order-summary h3 { margin-bottom: 1rem; }
+
+.sum-item {
+  display: grid; grid-template-columns: 56px 1fr auto;
+  gap: 0.8rem; align-items: center; padding: 0.6rem 0;
+}
+.thumb { position: relative; }
+.thumb img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; display: block; }
+.qty-badge {
+  position: absolute; top: -6px; right: -6px;
+  min-width: 20px; height: 20px; padding: 0 5px;
+  display: grid; place-items: center;
+  background: #222; color: #fff; font-size: 0.7rem; font-weight: 700; border-radius: 999px;
+}
+.sum-item strong { font-size: 0.95rem; }
+.meta { color: #777; font-size: 0.8rem; }
+
+.order-summary .row, .receipt .row { display: flex; justify-content: space-between; gap: 1rem; margin: 0.5rem 0; }
+.order-summary .total, .receipt .total {
+  font-size: 1.2rem; font-weight: 700;
+  border-top: 1px solid #d8dde2; padding-top: 0.9rem; margin-top: 0.9rem;
+}
+.free { color: #1f9d55; font-weight: 600; }
+
+button.button { border: 0; cursor: pointer; font-size: 1rem; }
+.place-order { display: block; width: 100%; padding: 0.9rem; margin-top: 1rem; text-align: center; font-size: 1.05rem; }
+.place-order:disabled { opacity: 0.7; cursor: wait; }
+.back-link { display: block; margin-top: 1rem; text-align: center; color: #0066ff; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+
+/* ---------- Order confirmation ---------- */
+.success { max-width: 620px; margin: 1rem auto 3rem; text-align: center; padding: 0; }
+.tick {
+  width: 5rem; height: 5rem; margin: 0 auto 1rem;
+  display: grid; place-items: center;
+  background: #1f9d55; color: #fff; font-size: 2.5rem; border-radius: 50%;
+  animation: pop 0.5s ease;
+}
+@keyframes pop { 0% { transform: scale(0); } 70% { transform: scale(1.15); } 100% { transform: scale(1); } }
+.success h2 { margin-bottom: 0.4rem; }
+.lead { color: #555; margin-bottom: 1.5rem; }
+.receipt { text-align: left; }
+.receipt hr { border: 0; border-top: 1px solid #e3e6ea; margin: 1rem 0; }
+.receipt .addr { text-align: right; font-weight: 500; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 850px) {
+  .checkout-page { padding: 1.25rem; }
+  .checkout-layout { grid-template-columns: 1fr; }
+  .order-summary { position: static; }
+  .fields, .pay-options { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tick { animation: none; }
+}
+
+/* ---------- My orders page ---------- */
+.order-card .oc-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+.order-card hr { border: 0; border-top: 1px solid #e3e6ea; margin: 1rem 0; }
+.order-card .meta { margin-top: 0.75rem; }
+.status {
+  background: #e7f6ec; color: #1f7a45; font-size: 0.8rem; font-weight: 700;
+  padding: 0.25rem 0.8rem; border-radius: 999px;
+}

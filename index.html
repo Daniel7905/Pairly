@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pairly</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="cart.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <h1>Pairly</h1>
+    <form class="search" onsubmit="return false">
+      <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="M20 20l-4-4"/>
+      </svg>
+      <input type="search" id="searchInput" placeholder="Search products..." aria-label="Search products">
+    </form>
+    <nav>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="cart-link" href="cart.html" aria-label="Cart">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 016 0"/></svg><span class="cart-count" id="cartCount">0</span>
+</a>
+  </header>
+
+  <section class="hero">
+    <h2>Welcome to Pairly</h2>
+    <p>Quality products at fair prices.</p>
+    <a class="button" href="#products">Shop now</a>
+  </section>
+
+  <!-- ================= PRODUCTS ================= -->
+  <section class="products reveal" id="products">
+    <div class="section-head">
+      <h2>Our Products</h2>
+      <p class="count" id="count"></p>
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="active" data-filter="all">All</button>
+      <button data-filter="sneakers">Sneakers</button>
+      <button data-filter="boots">Boots</button>
+      <button data-filter="sandals">Sandals</button>
+      <button data-filter="accessories">Accessories</button>
+    </div>
+
+    <div class="grid">
+
+      <article class="product" data-category="sneakers">
+        <div class="product-img"><span class="badge">New</span><img src="pexels-nathanjhilton-4277508.jpg" alt="Urban Runner"></div>
+        <div class="product-body">
+          <p class="category">Sneakers</p><h3>Urban Runner</h3><p class="rating">★★★★☆ <span>(24)</span></p>
+          <div class="product-footer"><p class="price">₹2999</p><a class="button" href="#">Buy</a></div>
+        </div>
+      </article>
+
+      <article class="product" data-category="sneakers">
+        <div class="product-img"><span class="badge sale">-20%</span><img src="pexels-mnzoutfits-1598505.jpg" alt="Street Classic"></div>
+        <div class="product-body">
+          <p class="category">Sneakers</p><h3>Street Classic</h3><p class="rating">★★★★★ <span>(58)</span></p>
+          <div class="product-footer"><p class="price">₹3599 <del>₹44</del></p><a class="button" href="#">Buy</a></div>
+        </div>
+      </article>
+
+      <article class="product" data-category="boots">
+        <div class="product-img"><img src="pexels-craytive-1456706.jpg" alt="Trail Boot"></div>
+        <div class="product-body">
+          <p class="category">Boots</p><h3>Trail Boot</h3><p class="rating">★★★★☆ <span>(12)</span></p>
+          <div class="product-footer"><p class="price">₹1500</p><a class="button" href="#">Buy</a></div>
+        </div>
+      </article>
+
+      <article class="product" data-category="sneakers">
+        <div class="product-img"><img src="pexels-eduardo199o9-178988127-33187093.jpg" alt="Canvas Low"></div>
+        <div class="product-body">
+          <p class="category">Sneakers</p><h3>Canvas Low</h3><p class="rating">★★★★☆ <span>(31)</span></p>
+          <div class="product-footer"><p class="price">₹999</p><a class="button" href="#">Buy</a></div>
+        </div>
+      </article>
+
+      <article class="product" data-category="boots">
+        <div class="product-img"><span class="badge">New</span><img src="pexels-hurrahsuhail-11324548.jpg" alt="Leather Chelsea"></div>
+        <div class="product-body">
+          <p class="category">Boots</p><h3>Leather Chelsea</h3><p class="rating">★★★★★ <span>(19)</span></p>
+          <div class="product-footer"><p class="price">₹2850</p><a class="button" href="#">Buy</a></div>
+        </div>
+      </article>
+
+      <article class="product" data-category="sandals">
+        <div class="product-img"><img src="pexels-indigentesce-8979069.jpg" alt="Beach Slide"></div>
+        <div class="product-body">
+          <p class="category">Sandals</p><h3>Beach Slide</h3><p class="rating">★★★★☆ <span>(42)</span></p>
+          <div class="product-footer"><p class="price">₹1899</p><a class="button" href="#">Buy</a></div>
+        </div>
+      </article>
+
+      <article class="product" data-category="sandals">
+        <div class="product-img"><span class="badge sale">-15%</span><img src="pexels-introspectivedsgn-6016948.jpg" alt="Summer Strap"></div>
+        <div class="product-body">
+          <p class="category">Sandals</p><h3>Summer Strap</h3><p class="rating">★★★★☆ <span>(16)</span></p>
+          <div class="product-footer"><p class="price">₹3200 <del>₹38</del></p><a class="button" href="#">Buy</a></div>
+        </div>
+      </article>
+
+      <article class="product" data-category="accessories">
+        <div class="product-img"><img src="pexels-lee-hanson-2161337044-37465528.jpg" alt="Shoe Care Kit"></div>
+        <div class="product-body">
+          <p class="category">Accessories</p><h3>Shoe Care Kit</h3><p class="rating">★★★★★ <span>(63)</span></p>
+          <div class="product-footer"><p class="price">₹1599</p><a class="button" href="#">Buy</a></div>
+        </div>
+      </article>
+
+      <article class="product" data-category="accessories">
+        <div class="product-img"><img src="pexels-lesandu-alokabandara-670648380-19893264.jpg" alt="Sport Socks"></div>
+        <div class="product-body">
+          <p class="category">Accessories</p><h3>Sport Socks (3-pack)</h3><p class="rating">★★★★☆ <span>(87)</span></p>
+          <div class="product-footer"><p class="price">₹1299</p><a class="button" href="#">Buy</a></div>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="empty" id="empty" hidden>No products found. Try another search or category.</p>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="about reveal" id="about">
+    <div class="about-main">
+      <div class="about-text">
+        <p class="eyebrow">About us</p>
+        <h2>Footwear we'd wear ourselves</h2>
+        <p>We started Pairly with a simple idea: good shoes shouldn't cost a fortune. Every pair in our store is picked by hand for comfort, quality and style.</p>
+        <p>Edit this text to tell your own story: who you are, why you started, and what makes your shop different.</p>
+        <a class="button" href="#contact">Get in touch</a>
+      </div>
+      <img class="about-img" src="pexels-omotayo-samuel-329103165-16350687.jpg" alt="Our shoe collection">
+    </div>
+
+    <div class="stats">
+      <div><strong>5K+</strong><span>Happy customers</span></div>
+      <div><strong>100+</strong><span>Products</span></div>
+      <div><strong>4.9★</strong><span>Average rating</span></div>
+    </div>
+
+    <div class="features">
+      <div class="feature"><span class="icon">🚚</span><h3>Free shipping</h3><p>On all orders over ₹50.</p></div>
+      <div class="feature"><span class="icon">↩️</span><h3>Easy returns</h3><p>30 days to change your mind.</p></div>
+      <div class="feature"><span class="icon">🔒</span><h3>Secure payment</h3><p>Your details are always protected.</p></div>
+    </div>
+  </section>
+
+  <section class="reveal" id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:hello@example.com">hello@example.com</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Pairly. All rights reserved.</p>
+  </footer>
+
+     <script src="card-links.js"></script>
+     <script src="auth.js"></script>
+
+    <script>
+      document.querySelectorAll(".product .button").forEach(function (b) {
+    b.addEventListener("click", function (e) { e.preventDefault(); });
+  });
+      const io = new IntersectionObserver(entries =>
+    entries.forEach(e => e.isIntersecting && e.target.classList.add("show")));
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+      const input   = document.getElementById("searchInput");
+      const buttons = document.querySelectorAll("#filters button");
+      const cards   = document.querySelectorAll(".product");
+      const count   = document.getElementById("count");
+      const empty   = document.getElementById("empty");
+
+      let category = "all";
+      let text = "";
+
+      // Show only cards that match BOTH the category and the search text
+      function update() {
+        let shown = 0;
+        cards.forEach(function (card) {
+          const name = card.querySelector("h3").textContent.toLowerCase();
+          const match = (category === "all" || card.dataset.category === category) && name.includes(text);
+          card.style.display = match ? "" : "none";
+          if (match) shown++;
+        });
+        count.textContent = shown + (shown === 1 ? " product" : " products");
+        empty.hidden = shown > 0;
+      }
+
+      input.addEventListener("input", function () {
+        text = input.value.toLowerCase();
+        update();
+      });
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          buttons.forEach(function (b) { b.classList.remove("active"); });
+          btn.classList.add("active");
+          category = btn.dataset.filter;
+          update();
+        });
+      });
+
+      update();
+    </script>
+  </body>
+  </html>

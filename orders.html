@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My orders – Pairly</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="cart.css">
+  <link rel="stylesheet" href="checkout.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <h1><a href="index.html">Pairly</a></h1>
+    <nav>
+      <a href="index.html#products">Products</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <a class="cart-link" href="cart.html" aria-label="Cart">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 016 0"/></svg>
+      Cart <span class="cart-count" id="cartCount">0</span>
+    </a>
+  </header>
+
+  <main class="checkout-page">
+    <h2>My orders</h2>
+    <div id="ordersBox"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Pairly. All rights reserved.</p>
+  </footer>
+
+  <script src="cart.js"></script>
+  <script src="auth.js"></script>
+  <script>
+    const box = document.getElementById("ordersBox");
+    const money = n => "₹" + n.toLocaleString("en-IN");
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    const user = Auth.currentUser();
+
+    if (!user) {
+      box.innerHTML =
+        '<div class="empty-cart"><div class="big">🔐</div><h3>Please log in</h3>' +
+        '<p>Log in to see your orders.</p>' +
+        '<a class="button" href="login.html?next=orders.html">Log in</a></div>';
+    } else {
+      let orders = [];
+      try { orders = JSON.parse(localStorage.getItem("myshop-orders")) || []; } catch (e) {}
+      orders = orders.filter(o => o.userEmail === user.email).reverse();   // newest first
+
+      if (!orders.length) {
+        box.innerHTML =
+          '<div class="empty-cart"><div class="big">📦</div><h3>No orders yet</h3>' +
+          '<p>When you place an order while logged in, it will show up here.</p>' +
+          '<a class="button" href="index.html#products">Start shopping</a></div>';
+      } else {
+        box.innerHTML = orders.map(o => {
+          const date = new Date(o.date).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+          return `<div class="box receipt order-card">
+            <div class="oc-head">
+              <div><strong>Order #${esc(o.id)}</strong><p class="meta">Placed on ${date}</p></div>
+              <span class="status">${esc(o.status)}</span>
+            </div>
+            <hr>
+            ${o.items.map(i => `<div class="row"><span>${esc(i.name)}${i.size ? " (" + esc(i.size) + ")" : ""} × ${i.qty}</span><span>${money(i.price * i.qty)}</span></div>`).join("")}
+            <div class="row"><span>Shipping</span><span>${o.shipping ? money(o.shipping) : "Free"}</span></div>
+            <div class="row total"><span>Total</span><span>${money(o.total)}</span></div>
+            <p class="meta">Payment: ${esc(o.payment)} · Ship to: ${esc(o.customer.address)}</p>
+          </div>`;
+        }).join("");
+      }
+    }
+  </script>
+</body>
+</html>

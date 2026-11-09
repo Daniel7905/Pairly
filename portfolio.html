@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Daniel Babu — Full-Stack Web Developer</title>
+<link rel="stylesheet" href="portfolio.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="wrap">
+<nav><b>DB</b><div><a href="#work">Work</a><a href="#skills">Skills</a><a href="#about">About</a><a href="#contact">Contact</a></div></nav>
+
+<header class="hero">
+<h1>Daniel<span>Babu</span></h1>
+<p>Full-stack web developer who builds practical systems: orders, inventory, billing and data tracking, from the database to the screen.</p>
+<div class="btns"><a class="btn p" href="#work">See my projects</a><a class="btn" href="#contact">Contact me</a></div>
+</header>
+
+<section id="work">
+<h2>Selected projects</h2>
+
+<details class="proj">
+<summary><div><h3>Bakery Management System</h3><p class="lead">One system for a bakery's orders, stock and billing.</p></div>
+<span class="tog"><span class="show">View details</span><span class="hide">Hide details</span></span></summary>
+<div class="more">
+<div class="meta"><span class="kind">Full-stack web app</span><i>PHP</i><i>JavaScript</i><i>MySQL</i></div>
+<div class="feat">
+<div><h4>Orders</h4><p>Track every order from placement to delivery in a simple, easy-to-use interface.</p></div>
+<div><h4>Inventory</h4><p>Update stock levels quickly as items are sold or restocked.</p></div>
+<div><h4>Billing</h4><p>Handle daily sales and customer data faster, with less manual work.</p></div>
+</div></div>
+</details>
+
+<details class="proj">
+<summary><div><h3>Waste Recycling System</h3><p class="lead">An application for tracking and managing recyclable waste data.</p></div>
+<span class="tog"><span class="show">View details</span><span class="hide">Hide details</span></span></summary>
+<div class="more">
+<div class="meta"><span class="kind">Full-stack web app</span><i>Python</i><i>JavaScript</i><i>MongoDB</i></div>
+<div class="feat">
+<div><h4>Classification</h4><p>Modules that sort waste into the right recycling categories.</p></div>
+<div><h4>Monitoring</h4><p>Follow the recycling process and see how waste is handled.</p></div>
+<div><h4>Scalable storage</h4><p>MongoDB keeps waste records fast to store and retrieve as data grows.</p></div>
+</div></div>
+</details>
+</section>
+
+<section id="skills">
+<h2>What I work with</h2>
+<div class="stack">
+<div class="srow"><b>Languages</b><div><i>Python</i><i>PHP</i><i>JavaScript</i></div></div>
+<div class="srow"><b>Frontend</b><div><i>HTML</i><i>CSS</i><i>JavaScript</i><i>Bootstrap</i></div></div>
+<div class="srow"><b>Backend</b><div><i>Node.js</i></div></div>
+<div class="srow"><b>Databases</b><div><i>MySQL</i><i>MongoDB</i></div></div>
+<div class="srow"><b>Tools</b><div><i>Git</i><i>VS Code</i><i>XAMPP</i></div></div>
+<div class="srow"><b>Soft skills</b><div><i>Communication</i><i>Teamwork</i><i>Problem-solving</i><i>Time management</i><i>Adaptability</i></div></div>
+</div>
+</section>
+
+<section id="about">
+<h2>About me</h2>
+<div class="about">
+<div>
+<p>I'm a BCA student at Nirmala Arts and Science College, Mulanthuruthy (Mahatma Gandhi University), graduating in 2026. I'm drawn to full-stack web development because it lets me follow a feature from the database all the way to the button someone clicks.</p>
+<p>I learn new technologies quickly and understand the basics of the software development lifecycle. I'm looking for an entry-level role where I can contribute and keep growing.</p>
+</div>
+<ol class="tl" aria-label="Education">
+<li class="now"><b>BCA</b><span>Nirmala Arts and Science College · Expected 2026</span></li>
+<li><b>Higher Secondary (+1, +2)</b><span>St. Ignatius School, Kanjiramattam · Kerala State Syllabus</span></li>
+<li><b>Secondary (up to 10th)</b><span>Hail Mary English Medium Residential Higher Secondary School</span></li>
+</ol>
+</div>
+</section>
+
+<section id="contact">
+<h2>Let's work together</h2>
+<p class="intro">Hiring for an entry-level web developer role? Fill in your details and send me a message.</p>
+<form id="cf">
+<label>Your name<input name="name" type="text" autocomplete="name" required></label>
+<label>Your email<input name="email" type="email" autocomplete="email" required></label>
+<label>Message<textarea name="message" required></textarea></label>
+<button class="btn p" type="submit">Send message</button>
+<p id="status" role="status"></p>
+</form>
+</section>
+</div>
+<footer><div class="wrap">© 2026 Daniel Babu</div></footer>
+<script>
+document.getElementById("cf").addEventListener("submit",function(e){
+e.preventDefault();
+var f=e.target,to=["danielbabu795","gmail.com"].join("@");
+var body=f.message.value+"\n\n— "+f.name.value+" ("+f.email.value+")";
+document.getElementById("status").textContent="Opening your email app with your message ready to send.";
+location.href="mailto:"+to+"?subject="+encodeURIComponent("Portfolio message from "+f.name.value)+"&body="+encodeURIComponent(body);
+});
+</script>
+</body>
+</html>
